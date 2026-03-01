@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hehe 😜</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;min-height:100vh;display:flex;justify-content:center;align-items:center;background:#000;}
+.phone{
+  width:360px;height:640px;border-radius:22px;
+  background:linear-gradient(#ffd6e8,#fff);
+  font-family:Poppins;text-align:center;
+}
+#msg{
+  margin-top:120px;
+  font-size:1.4rem;
+}
+.heartBtn{
+  width:46px;height:46px;
+  border-radius:50%;
+  background:#ff5fa2;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-size:20px;
+  margin:12px;
+  cursor:pointer;
+}
+.pop{animation:pop .35s ease;}
+@keyframes pop{
+  50%{transform:scale(1.3)}
+}
+#next{display:none;margin-top:30px;}
+button{
+  padding:8px 22px;
+  border:none;border-radius:20px;
+  background:#222;color:white;
+  font-size:13px;cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <div id="msg">Tap the hearts 💕</div>
+
+  <div>
+    <div class="heartBtn">❤️</div>
+    <div class="heartBtn">❤️</div>
+    <div class="heartBtn">❤️</div>
+  </div>
+
+  <div id="next">
+    <button onclick="location.href='birthday.html'">Continue 😌</button>
+  </div>
+</div>
+
+<script>
+let taps=0;
+const msg=document.getElementById("msg");
+
+document.querySelectorAll(".heartBtn").forEach(h=>{
+  h.onclick=()=>{
+    h.classList.add("pop");
+    setTimeout(()=>h.classList.remove("pop"),300);
+    taps++;
+    if(taps===1) msg.innerText="That was quick 😳";
+    if(taps===2) msg.innerText="Haha 😄 one more!";
+    if(taps===3){
+      msg.innerText="Alright… ready 🎂";
+      document.getElementById("next").style.display="block";
+    }
+  };
+});
+</script>
+
+</body>
+</html>
