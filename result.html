@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Result</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Poppins,sans-serif;
+}
+
+.phone{
+  width:390px;
+  height:780px;
+  background:linear-gradient(135deg,#b51a89,#6a00ff);
+  border-radius:28px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+}
+
+.card{
+  text-align:center;
+  padding:30px;
+  animation:fadeUp .7s ease;
+}
+
+button{
+  margin-top:25px;
+  padding:12px 30px;
+  border:none;
+  border-radius:25px;
+  font-weight:600;
+  cursor:pointer;
+  animation:pop 1.4s infinite;
+}
+
+@keyframes pop{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="card">
+    <h2 id="name"></h2>
+    <p id="msg"></p>
+    <button onclick="again()">Try Another Name 😏</button>
+  </div>
+</div>
+
+<script>
+const n=localStorage.getItem("player")||"You";
+const msgs=[
+ `${n}, let’s be honest… you don’t even try, yet people notice you. That kind of confidence is dangerously attractive 😏`,
+ `${n}, your presence alone changes the mood. Someone out there is smiling just because your name popped up 👀`,
+ `${n}, you give main-character energy without forcing it. That’s why people secretly want your attention 😈`,
+ `${n}, if attraction had a face, it would probably look a lot like you. Calm, confident, unforgettable 💘`,
+ `${n}, you’re the type people remember long after a conversation ends. That’s rare… and very tempting 😌`
+];
+
+name.textContent=n;
+msg.textContent=msgs[Math.floor(Math.random()*msgs.length)];
+
+function again(){
+  location.href="index.html";
+}
+</script>
+</body>
+</html>

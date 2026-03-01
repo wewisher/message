@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Name Game</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body{
+  margin:0;
+  height:100vh;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Poppins,sans-serif;
+}
+
+.phone{
+  width:390px;
+  height:780px;
+  background:linear-gradient(135deg,#ff4ecd,#6a00ff);
+  border-radius:28px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.card{
+  text-align:center;
+  color:#fff;
+  padding:30px;
+  animation:fadeUp .7s ease;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  border:none;
+  margin-top:15px;
+  font-size:16px;
+}
+
+button{
+  margin-top:22px;
+  padding:12px 30px;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  animation:pop 1.4s infinite;
+}
+
+@keyframes pop{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="card">
+    <h1>Hey 👀</h1>
+    <p>Enter your name</p>
+    <input id="name" placeholder="Your name…" />
+    <button onclick="go()">Reveal Secret 😏</button>
+  </div>
+</div>
+
+<script>
+function go(){
+  const n=document.getElementById("name").value.trim();
+  if(!n) return;
+  localStorage.setItem("player",n);
+  location.href="loading.html";
+}
+</script>
+</body>
+</html>
