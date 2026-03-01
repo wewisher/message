@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Happy Birthday Preetha 🎂</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;min-height:100vh;
+  display:flex;justify-content:center;align-items:center;
+  background:#000;
+}
+.phone{
+  width:360px;height:640px;border-radius:22px;
+  background:radial-gradient(circle at top,#2b0052,#000);
+  color:white;
+  font-family:Inter,sans-serif;
+  overflow:hidden;position:relative;
+}
+#center{
+  position:absolute;top:45%;left:50%;
+  transform:translate(-50%,-50%);
+  width:100%;padding:0 22px;text-align:center;
+}
+
+/* base animation */
+.line{
+  opacity:0;
+  transform:translateY(16px) scale(.97);
+  filter:blur(6px);
+  transition:all .9s cubic-bezier(.22,.61,.36,1);
+}
+.line.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+}
+
+/* styles */
+.small{
+  font-size:1.05rem;
+  opacity:.9;
+}
+.count{
+  font-size:2.6rem;
+  font-weight:500;
+}
+
+/* birthday reveal */
+.title{
+  font-family:'Playfair Display',serif;
+  font-size:2.2rem;
+  margin-bottom:8px;
+  color:#ffd1ea;
+  text-shadow:
+    0 2px 4px rgba(0,0,0,.7),
+    0 0 14px rgba(255,140,200,.7);
+}
+.name{
+  font-family:'Playfair Display',serif;
+  font-size:2.4rem;
+  color:#ff8fd8;
+  text-shadow:
+    0 3px 6px rgba(0,0,0,.8),
+    0 0 18px rgba(255,143,216,.85);
+}
+
+/* reveal animation */
+.reveal{
+  animation:reveal 1.4s cubic-bezier(.22,.61,.36,1) forwards;
+}
+@keyframes reveal{
+  0%{opacity:0;transform:scale(.85)}
+  60%{opacity:1;transform:scale(1.08)}
+  100%{transform:scale(1)}
+}
+
+/* hearts */
+.heart{
+  position:absolute;bottom:-20px;
+  font-size:16px;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  to{transform:translateY(-120vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+  <div id="center"></div>
+</div>
+
+<script>
+const box = document.getElementById("center");
+
+/* helper function */
+function show(text, cls="small", delay=1200){
+  return new Promise(res=>{
+    box.innerHTML = `<div class="line ${cls}">${text}</div>`;
+    setTimeout(()=>{
+      box.firstChild.classList.add("show");
+      setTimeout(res, delay);
+    },100);
+  });
+}
+
+async function play(){
+
+  /* SLOW INTRO MESSAGES */
+  await show("Okay… now close your eyes 🙈", "small", 2500);
+  await show("Hey 😅 don’t cheat<br>Close them & count to 5…", "small", 2400);
+
+  /* tiny cinematic pause */
+  await new Promise(r => setTimeout(r, 500));
+
+  /* COUNTDOWN */
+  for(let i=5;i>=1;i--){
+    await show(i, "count", 700);
+  }
+
+  /* CLEAR + BIG REVEAL */
+  box.innerHTML = "";
+
+  const hb = document.createElement("div");
+  hb.className = "title reveal";
+  hb.innerText = "Happy Birthday";
+  box.appendChild(hb);
+
+  await new Promise(r => setTimeout(r, 1600));
+
+  const nm = document.createElement("div");
+  nm.className = "name reveal";
+  nm.innerText = "Preetha 💖";
+  box.appendChild(nm);
+
+  await new Promise(r => setTimeout(r, 1800));
+
+  /* HEARTFELT MESSAGES */
+  await show("May your days always feel warm ✨", "small", 1600);
+  await show("And your heart always feel loved ❤️", "small", 1600);
+  await show("You truly deserve all the happiness 😌", "small", 1700);
+
+  /* HEARTS AFTER EVERYTHING */
+  setInterval(()=>{
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "❤️";
+    h.style.left = Math.random()*320 + "px";
+    document.querySelector(".phone").appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },380);
+}
+
+play();
+</script>
+
+</body>
+</html>
