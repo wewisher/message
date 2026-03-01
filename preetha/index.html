@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Surprise 👀</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;min-height:100vh;
+  display:flex;justify-content:center;align-items:center;
+  background:#000;
+}
+.phone{
+  width:360px;height:640px;border-radius:22px;
+  background:radial-gradient(circle,#2b0052,#000);
+  color:white;
+  font-family:Inter,sans-serif;
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+}
+
+#msg{
+  margin-top:190px;
+  font-size:1.1rem;
+  opacity:.9;
+  transition:opacity .5s ease;
+}
+
+button{
+  position:absolute;
+  top:360px;
+  left:110px;
+  padding:10px 22px;
+  border:none;
+  border-radius:999px;
+  background:#ff5fa2;
+  color:white;
+  font-size:13px;
+  font-weight:500;
+  cursor:pointer;
+  display:none;
+  transition:all .35s ease;
+}
+
+/* pop animation */
+.pop{
+  animation:pop .4s ease;
+}
+@keyframes pop{
+  50%{transform:scale(1.25)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+  <div id="msg">Wanna see a surprise? 👀</div>
+  <button id="btn">Click here 💖</button>
+</div>
+
+<script>
+const msg = document.getElementById("msg");
+const btn = document.getElementById("btn");
+
+let tries = 0;
+let unlocked = false;
+
+/* STEP 1 → after 2 seconds, change message + show button */
+setTimeout(()=>{
+  msg.style.opacity = 0;
+
+  setTimeout(()=>{
+    msg.innerHTML = "hehe..lets unlock the surprise 😌";
+    msg.style.opacity = 1;
+    btn.style.display = "block";
+  },500);
+
+},2000);
+
+/* STEP 2 → button teasing */
+btn.addEventListener("mouseover", ()=>{
+  if(unlocked) return;
+
+  tries++;
+
+  if(tries <= 2){
+    btn.style.left = Math.random()*220 + "px";
+    btn.style.top  = 300 + Math.random()*120 + "px";
+  }
+
+  if(tries === 3){
+    unlocked = true;
+    msg.innerHTML = "Haha 😅how are you feeling exciting okay then lets unlock💕";
+    btn.classList.add("pop");
+  }
+});
+
+/* STEP 3 → click works only after unlock */
+btn.addEventListener("click", ()=>{
+  if(!unlocked) return;
+
+  btn.classList.add("pop");
+  setTimeout(()=>{
+    location.href = "birthday.html";
+  },300);
+});
+</script>
+
+</body>
+</html>
